@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Standards Alignment - Lesson 3.6</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: 1600px;
+            overflow-y: auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+        .lesson-info {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .content {
+            padding: 2rem;
+        }
+        .intro {
+            background: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #2196f3;
+        }
+        .intro p {
+            margin-bottom: 10px;
+        }
+        .standards-selector {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .standards-selector label {
+            display: block;
+            margin-bottom: 10px;
+            color: #667eea;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .standards-selector select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .standards-selector select:hover {
+            border-color: #764ba2;
+        }
+        .standards-selector select:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+        }
+        .standards-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+        .standards-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .standard-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid #667eea;
+        }
+        .standard-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .standard-section h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .standard-item {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 3px solid #9c27b0;
+        }
+        .standard-code {
+            font-weight: 600;
+            color: #764ba2;
+            font-size: 0.95em;
+        }
+        .standard-description {
+            margin-top: 8px;
+            color: #555;
+        }
+        .alignment-note {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ff9800;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        .lesson-mapping {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .lesson-mapping strong {
+            color: #2e7d32;
+        }
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .print-button:hover {
+            background: #764ba2;
+        }
+        @media print {
+            .print-button, .standards-selector {
+                display: none;
+            }
+            .standards-content {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>State Standards Alignment</h1>
+            <div class="subtitle">Understanding AI: A Conceptual Approach</div>
+            <div class="lesson-info">Chapter 3, Lesson 3.6: AI Whispering Your Creativity</div>
+        </div>
+
+        <button class="print-button" onclick="window.print()">🖨️ Print Standards</button>
+
+        <div class="content">
+            <div class="intro">
+                <p><strong>Lesson 3.6</strong> is a Project Day where students apply prompt engineering skills to their creative writing projects. Through independent work, students practice iterative refinement, editorial judgment, and strategic context decisions while using AI as a creative partner. This applied learning experience aligns with multiple state and national standards through creative communication, technological literacy, metacognitive reflection, and career readiness skills.</p>
+            </div>
+
+            <div class="standards-selector">
+                <label for="standards-select">Select Standards Framework:</label>
+                <select id="standards-select" onchange="showStandards(this.value)">
+                    <option value="">-- Choose State Standards --</option>
+                    <option value="texas">Texas (TEKS)</option>
+                    <option value="california">California</option>
+                    <option value="florida">Florida</option>
+                    <option value="newyork">New York</option>
+                    <option value="pennsylvania">Pennsylvania</option>
+                    <option value="illinois">Illinois</option>
+                    <option value="ohio">Ohio</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="northcarolina">North Carolina</option>
+                    <option value="michigan">Michigan</option>
+                    <option value="virginia">Virginia</option>
+                    <option value="washington">Washington</option>
+                    <option value="mississippi">Mississippi</option>
+                    <option value="colorado">Colorado</option>
+                    <option value="ccss">Common Core State Standards (CCSS) - ELA</option>
+                    <option value="iste">ISTE Standards for Students</option>
+                    <option value="csta">CSTA K-12 Computer Science Standards</option>
+                    <option value="c3">C3 Framework for Social Studies</option>
+                </select>
+            </div>
+
+            <!-- Common Core Standards -->
+            <div id="ccss" class="standards-content">
+                <div class="standard-section">
+                    <h2>Common Core State Standards - English Language Arts</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 3.6's applied creative work emphasizes the iterative writing process, critical evaluation of text, and metacognitive reflection—core elements of college and career readiness in writing and communication.
+                    </div>
+
+                    <h3>Writing Standards (Grades 9-10)</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.9-10.3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences or events using effective technique, well-chosen details, and well-structured event sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students develop their creative writing projects through strategic prompting and editorial decisions, applying narrative techniques while using AI as a collaborative tool to refine story elements.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.9-10.5</div>
+                        <div class="standard-description">Develop and strengthen writing as needed by planning, revising, editing, rewriting, or trying a new approach, focusing on addressing what is most significant for a specific purpose and audience.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students engage in iterative refinement of their creative work, evaluating AI-generated content and making editorial decisions to improve quality based on systematic criteria from Lesson 3.5.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.9-10.6</div>
+                        <div class="standard-description">Use technology, including the Internet, to produce, publish, and update individual or shared writing products, taking advantage of technology's capacity to link to other information and to display information flexibly and dynamically.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students use Alia-Creative as a technological tool to produce and refine creative writing, demonstrating effective human-AI collaboration while maintaining editorial control over their work.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.W.9-10.10</div>
+                        <div class="standard-description">Write routinely over extended time frames (time for research, reflection, and revision) and shorter time frames (a single sitting or a day or two) for a range of tasks, purposes, and audiences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students engage in sustained creative work during the 35-40 minute work session, followed by metacognitive reflection in field journals about their process, flow state, and AI partnership experience.</div>
+                    </div>
+
+                    <h3>Speaking and Listening Standards (Grades 9-10)</h3>
+
+                    <div class="standard-item">
+                        <div class="standard-code">CCSS.ELA-LITERACY.SL.9-10.6</div>
+                        <div class="standard-description">Adapt speech to a variety of contexts and tasks, demonstrating command of formal English when indicated or appropriate.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students adapt their prompting strategies to different creative contexts, learning to communicate effectively with AI by providing appropriate context and specific direction based on their creative goals.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mississippi Standards -->
+            <div id="mississippi" class="standards-content">
+                <div class="standard-section">
+                    <h2>Mississippi College and Career Readiness Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 3.6 develops practical application of technological tools in creative contexts, emphasizing the career-ready skills of iteration, evaluation, and effective communication with AI systems.
+                    </div>
+
+                    <h3>English Language Arts - Writing (Grades 9-10)</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">W.9-10.3</div>
+                        <div class="standard-description">Write narratives to develop real or imagined experiences or events using effective technique, well-chosen details, and well-structured event sequences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students apply narrative writing techniques to their creative projects, using AI collaboration to develop story elements while exercising editorial judgment to ensure quality and coherence.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">W.9-10.5</div>
+                        <div class="standard-description">Develop and strengthen writing through planning, revising, editing, rewriting, or trying a new approach.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students practice iterative refinement throughout the work session, evaluating multiple AI responses and making systematic decisions about revision based on their editorial criteria.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">W.9-10.6</div>
+                        <div class="standard-description">Use technology to produce and publish writing and to interact and collaborate with others.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students use AI technology strategically to produce creative writing, demonstrating effective human-technology collaboration while maintaining their role as curator and director of the creative output.</div>
+                    </div>
+
+                    <h3>Career and Technical Education Standards</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">MS-CTE.1</div>
+                        <div class="standard-description">Demonstrate employability skills required by business and industry including communication, critical thinking, and adaptability.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students practice professional-level skills: communicating clearly with AI tools through effective prompting, thinking critically about output quality, and adapting their approach based on evaluation.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">MS-CTE.2</div>
+                        <div class="standard-description">Understand the importance of workplace ethics and demonstrate ethical behavior in all aspects of work.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students engage with questions of authorship, creative partnership, and ethical use of AI tools while maintaining their role as the creative director and curator of their work.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colorado Standards -->
+            <div id="colorado" class="standards-content">
+                <div class="standard-section">
+                    <h2>Colorado Academic Standards (CAS)</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 3.6 emphasizes applied learning through creative practice, developing both technological literacy and metacognitive awareness—key priorities in Colorado's preparation for college, career, and civic life.
+                    </div>
+
+                    <h3>Reading, Writing, and Communicating - High School</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">RWC.HS.2.1</div>
+                        <div class="standard-description">Demonstrate competence in writing narratives, focusing on establishing a situation, characters, setting, point of view, and plot.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students develop narrative elements through AI collaboration, applying editorial judgment to ensure effective characterization, setting development, and plot progression in their creative projects.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">RWC.HS.3.1</div>
+                        <div class="standard-description">Collaborate with others to develop and strengthen writing through planning, revising, editing, and publishing.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students collaborate with AI as a creative partner, practicing iterative refinement through multiple prompt-evaluate-revise cycles, demonstrating that effective collaboration requires clear communication and systematic evaluation.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">RWC.HS.3.2</div>
+                        <div class="standard-description">Use technology to enhance the writing process and produce, publish, and update writing products.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students use Alia-Creative to enhance their creative writing process, learning to leverage AI capabilities while maintaining editorial control and making strategic decisions about what to keep, revise, or discard.</div>
+                    </div>
+
+                    <h3>Career Development - High School</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">CD.HS.1.1</div>
+                        <div class="standard-description">Evaluate how technology affects personal, community and career choices.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Field journal reflection prompts students to metacognitively evaluate their experience with AI collaboration, considering how this technology changes creative work and what skills remain uniquely human.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">CD.HS.2.2</div>
+                        <div class="standard-description">Demonstrate self-management skills including goal-setting, time management, and adaptability in work contexts.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students practice self-directed work during the 35-40 minute creative session, managing their time, setting priorities for story development, and adapting their prompting strategies based on results.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ISTE Standards -->
+            <div id="iste" class="standards-content">
+                <div class="standard-section">
+                    <h2>ISTE Standards for Students</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 3.6 exemplifies effective use of technology for creative production, emphasizing students' roles as empowered learners who use digital tools strategically while maintaining creative control and critical judgment.
+                    </div>
+
+                    <h3>1. Empowered Learner</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">1a. Articulate and set personal learning goals</div>
+                        <div class="standard-description">Students articulate and set personal learning goals, develop strategies leveraging technology to achieve them and reflect on the learning process itself to improve learning outcomes.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students set creative goals for their story development and strategically use AI to achieve those goals, then reflect metacognitively on their process, engagement, and the effectiveness of their human-AI collaboration.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">1c. Use technology to seek feedback</div>
+                        <div class="standard-description">Students use technology to seek feedback that informs and improves their practice and to demonstrate their learning in a variety of ways.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students use AI to generate multiple versions of story elements, effectively seeking "feedback" through iteration, then apply editorial judgment to select and refine content that best serves their creative vision.</div>
+                    </div>
+
+                    <h3>3. Knowledge Constructor</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">3d. Build knowledge by actively exploring real-world issues</div>
+                        <div class="standard-description">Students build knowledge by actively exploring real-world issues and problems, developing ideas and theories and pursuing answers and solutions.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students explore the real-world issue of human-AI creative collaboration through direct practice, developing practical understanding of effective partnership strategies and the complementary roles of human judgment and AI capability.</div>
+                    </div>
+
+                    <h3>4. Innovative Designer</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">4a. Know and use deliberate design process</div>
+                        <div class="standard-description">Students know and use a deliberate design process for generating ideas, testing theories, creating innovative artifacts or solving authentic problems.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students follow an iterative design process: prompt → evaluate → refine → integrate, applying this systematic approach to creative story development while documenting their process and insights.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">4b. Select and use digital tools</div>
+                        <div class="standard-description">Students select and use digital tools to plan and manage a design process that considers design constraints and calculated risks.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students make strategic decisions about when and how to use AI for different story elements, managing the creative process by balancing AI capabilities with their own editorial judgment and creative vision.</div>
+                    </div>
+
+                    <h3>6. Creative Communicator</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">6a. Choose appropriate platforms and tools</div>
+                        <div class="standard-description">Students choose the appropriate platforms and tools for meeting the desired objectives of their creation or communication.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students learn to use AI as one tool in their creative toolkit, understanding when AI collaboration is helpful and when to rely on their own creative judgment, developing discernment about tool selection.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">6b. Create original works</div>
+                        <div class="standard-description">Students create original works or responsibly repurpose or remix digital resources into new creations.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students create original creative writing by directing AI collaboration, curating and remixing AI-generated elements into cohesive stories while maintaining their role as creative director and primary author.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">6d. Publish or present content</div>
+                        <div class="standard-description">Students publish or present content that customizes the message and medium for their intended audiences.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students develop creative content with specific audiences in mind, applying the "audience fit" criterion from Lesson 3.5 to ensure their stories serve their intended purpose and readers.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSTA Standards -->
+            <div id="csta" class="standards-content">
+                <div class="standard-section">
+                    <h2>CSTA K-12 Computer Science Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 3.6 develops practical understanding of effective human-AI collaboration, emphasizing the importance of clear communication with AI systems and systematic evaluation of computational outputs.
+                    </div>
+
+                    <h3>Impacts of Computing</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">3A-IC-24</div>
+                        <div class="standard-description">Evaluate the ways computing impacts personal, ethical, social, economic, and cultural practices.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Field journal reflection prompts students to evaluate how AI impacts creative work, considering their experience of flow, engagement, and the changing nature of creative authorship in AI-integrated contexts.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">3B-IC-25</div>
+                        <div class="standard-description">Evaluate computational artifacts to maximize their beneficial effects and minimize harmful effects on society.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students practice evaluating AI-generated content systematically, learning to identify what works and what doesn't, developing skills for critically assessing AI outputs rather than accepting them uncritically.</div>
+                    </div>
+
+                    <h3>Algorithms & Programming</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">3A-AP-16</div>
+                        <div class="standard-description">Design and iteratively develop computational artifacts for practical intent, personal expression, or to address a societal issue by using events to initiate instructions.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students engage in iterative development of creative artifacts, using prompting (events) to initiate AI responses (instructions), learning through practice how iteration and evaluation improve computational outputs.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">3B-AP-21</div>
+                        <div class="standard-description">Develop and use a series of test cases to verify that a program performs according to its design specifications.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students develop evaluation criteria (test cases) to verify that AI output meets their creative specifications, learning to systematically test whether responses serve their intended purpose and audience.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- C3 Framework -->
+            <div id="c3" class="standards-content">
+                <div class="standard-section">
+                    <h2>C3 Framework for Social Studies State Standards</h2>
+                    
+                    <div class="alignment-note">
+                        Lesson 3.6 develops applied skills in evaluation, decision-making, and metacognitive reflection—transferable competencies essential for informed citizenship and effective participation in technology-integrated society.
+                    </div>
+
+                    <h3>Dimension 2: Applying Disciplinary Concepts and Tools</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">D2.Eco.1.9-12</div>
+                        <div class="standard-description">Analyze how incentives influence choices that may result in policies with a range of costs and benefits for different groups.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students experience firsthand the tradeoffs in AI collaboration—efficiency gains versus creative control, speed versus quality—developing understanding of how technological choices involve costs and benefits.</div>
+                    </div>
+
+                    <h3>Dimension 3: Evaluating Sources and Using Evidence</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">D3.1.9-12</div>
+                        <div class="standard-description">Gather relevant information from multiple sources representing a wide range of views while using the origin, authority, structure, context, and corroborative value of the sources to guide the selection.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students gather multiple AI-generated responses to the same prompt and systematically evaluate which sources (responses) best serve their creative needs, practicing source evaluation in a creative context.</div>
+                    </div>
+
+                    <h3>Dimension 4: Communicating Conclusions and Taking Informed Action</h3>
+                    
+                    <div class="standard-item">
+                        <div class="standard-code">D4.1.9-12</div>
+                        <div class="standard-description">Construct arguments using precise and knowledgeable claims, with evidence from multiple sources, while acknowledging counterclaims and evidentiary weaknesses.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Field journal reflections require students to construct reasoned arguments about their creative process using specific evidence from their work session, acknowledging both what worked well and what didn't.</div>
+                    </div>
+
+                    <div class="standard-item">
+                        <div class="standard-code">D4.7.9-12</div>
+                        <div class="standard-description">Assess options for individual and collective action to address local, regional, and global problems by engaging in self-reflection, strategy identification, and complex causal reasoning.</div>
+                        <div class="lesson-mapping"><strong>Lesson 3.6 Alignment:</strong> Students engage in metacognitive self-reflection about their creative process, identifying effective strategies for AI collaboration and reasoning about what made their work successful or challenging.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- End content -->
+    </div><!-- End container -->
+
+    <script>
+        function showStandards(value) {
+            // Hide all standards content
+            const allContent = document.querySelectorAll('.standards-content');
+            allContent.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected standards
+            if (value) {
+                const selectedContent = document.getElementById(value);
+                if (selectedContent) {
+                    selectedContent.classList.add('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
